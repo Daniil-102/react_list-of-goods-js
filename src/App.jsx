@@ -25,9 +25,13 @@ export const App = () => {
   const [isReset, setIsReset] = useState(false);
 
   const sortGoodsByAlphabet = () => {
-    const sortedGoods = [...goods].sort((a, b) =>
-      sortState.reversed ? b.localeCompare(a) : a.localeCompare(b),
-    );
+    const sortedGoods = [...goods].sort((a, b) => {
+      if (sortState.reversed) {
+        return b.localeCompare(a);
+      }
+
+      return a.localeCompare(b);
+    });
 
     setGoods(sortedGoods);
     setSortState({ ...sortState, alphabetSorted: true, lengthSorted: false });
@@ -35,9 +39,13 @@ export const App = () => {
   };
 
   const sortGoodsByLength = () => {
-    const sortedGoods = [...goods].sort((a, b) =>
-      sortState.reversed ? b.length - a.length : a.length - b.length,
-    );
+    const sortedGoods = [...goods].sort((a, b) => {
+      if (sortState.reversed) {
+        return b.length - a.length;
+      }
+
+      return a.length - b.length;
+    });
 
     setGoods(sortedGoods);
     setSortState({ ...sortState, lengthSorted: true, alphabetSorted: false });
